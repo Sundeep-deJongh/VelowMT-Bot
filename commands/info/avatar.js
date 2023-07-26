@@ -19,7 +19,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle('Profielfoto van ' + user.username)
                 .setImage(user.displayAvatarURL({ dynamic: true, size: 4096 }))
-                .setColor(process.env.EMBED_COLOR)
+                .setColor(process.env.DEFAULT_EMBED_COLOR)
                 .setFooter({
                     text: 'Aangevraagd door ' + interaction.user.username
                 })
