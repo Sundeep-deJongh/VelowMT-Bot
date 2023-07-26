@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, CommandInteraction } = require('discord.js');
+const { SlashCommandBuilder, CommandInteraction, EmbedBuilder } = require('discord.js');
 const dotenv = require('dotenv');
 
 module.exports = {
