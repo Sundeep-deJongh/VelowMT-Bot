@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, CommandInteraction, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, CommandInteraction, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const dotenv = require('dotenv');
 const axios = require('axios');
 
@@ -9,8 +9,8 @@ module.exports = {
         .addIntegerOption(option =>
             option.setName('aantal')
                 .setDescription('het aantal berichten dat je wil verwijderen (Maximaal 100).')
-                .setRequired(true)
-        ),
+                .setRequired(true))
+                .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
 
     async execute(interaction, client) {
         try {
@@ -26,6 +26,7 @@ module.exports = {
                                 content: "Je kan maximaal 100 berichten verwijderen!",
                                 ephemeral: true
                             });
+
                         } else {
                             interaction.channel.bulkDelete(aantal)
                                 .then(() => {
@@ -42,6 +43,7 @@ module.exports = {
                                 });
                         };
                     });
+
 
         } catch (error) {
             console.log(error);

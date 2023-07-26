@@ -29,16 +29,22 @@ module.exports = {
 
             const json = await response.json();
 
+            if(json.success === false) return interaction.reply({
+                content: 'Speler niet gevonden!',
+                ephemeral: true
+            });
+
             let embed = new EmbedBuilder()
                 .setTitle('Speler Informatie')
                 .setColor(process.env.DEFAULT_EMBED_COLOR)
-                .setThumbnail(process.env.DEFAULT_EMBED_THUMBNAIL)
+                .setThumbnail(`https://visage.surgeplay.com/head/${interaction.options.getString('speler')}`)
                 .addFields(
                     { name: 'Speler', value: `${interaction.options.getString('speler')}` },
                     { name: 'Prefix', value: `${json.prefix}` },
                     { name: 'Level', value: `${json.level}` },
+                    { name: 'Geld' , value: `€${json.money}`},
                     { name: 'Fitheid', value: `${json.fitness}` },
-                    { name: 'Playtime', value: `${json.timeDays} dagen, ${json.timeHours} uur, ${json.timeMinutes} minuten, ${json.timeSeconds} seconden` },
+                    { name: 'Speeltijd', value: `${json.timeDays} dagen, ${json.timeHours} uur, ${json.timeMinutes} minuten, ${json.timeSeconds} seconden` },
                 )
                 .setFooter({
                     text: 'Aangevraagd door ' + interaction.user.username
