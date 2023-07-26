@@ -1,4 +1,5 @@
 const fs = require("fs");
+const chalk = require("chalk");
 
 function loadEvents(client) {
 
@@ -28,7 +29,7 @@ function loadEvents(client) {
         }
     }
 
-    return console.log(`Loaded events Succesfully!`);
+    return console.log(chalk.magenta('[Events]') + chalk.magentaBright(' Succesfully loaded ' + folders.length + ' events'));
 }
 
 function getDirectories(path) {

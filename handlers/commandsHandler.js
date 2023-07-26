@@ -4,6 +4,7 @@ const { PermissionsBitField } = require('discord.js');
 const { Routes } = require('discord-api-types/v9');
 const { REST } = require('@discordjs/rest')
 const dotenv = require('dotenv');
+const chalk = require('chalk');
 
 function loadCommands(client) {
     let commandsArray = [];
@@ -33,7 +34,7 @@ function loadCommands(client) {
 
     developerGuild.commands.set(developersArray);
 
-    return console.log(`Loaded commands Succesfully!`);
+    return console.log(chalk.red('[Commands]') + chalk.redBright(' Succesfully loaded ' + client.commands.size + ' commands.'));
 
 
 };

@@ -6,6 +6,7 @@ const { createConnection } = require('mysql');
 const discordModals  = require('discord-modals');
 const dotenv = require('dotenv');
 const config = require('./database.json');
+const chalk = require('chalk');
 
 const client = new Client({
     intents: [
@@ -59,7 +60,7 @@ let con = createConnection(config.mysql);
 
 con.connect(err => {
     if(err) return console.log(err);
-    console.log('Connected to the VelowMT database!');
+    console.log(chalk.green('[MySQL]') + chalk.greenBright(' Succesfully connected to the VelowMT database.'));
 });
 
 require('dotenv').config();
@@ -69,7 +70,7 @@ discordModals(client);
 client.commands = new Collection();
 
 client.login(process.env.DISCORD_BOT_TOKEN).then(() => {
-    console.log('Succesfully logged in as ' + client.user.tag);
+     console.log(chalk.blue('[BOT]') + chalk.blueBright(' Succesfully logged in as ' + client.user.tag + '.'));
     loadEvents(client);
     loadCommands(client);
 
