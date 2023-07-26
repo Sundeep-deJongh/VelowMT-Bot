@@ -1,9 +1,11 @@
 const { Client, GatewayIntentBits, Collection, Partials, ActivityType } = require('discord.js');
 const { loadEvents } = require('./handlers/eventsHandler');
 const { loadCommands } = require('./handlers/commandsHandler');
+const { createConnection } = require('mysql');
 
 const discordModals  = require('discord-modals');
 const dotenv = require('dotenv');
+const config = require('./database.json');
 
 const client = new Client({
     intents: [
@@ -52,6 +54,14 @@ client.on("ready", () => {
         s++;
     }, 5000);
 });
+
+let con = createConnection(config.mysql);
+
+con.connect(err => {
+    if(err) return console.log(err);
+    console.log('Connected to the VelowMT database!');
+});
+
 require('dotenv').config();
 
 discordModals(client);
